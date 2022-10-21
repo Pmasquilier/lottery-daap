@@ -5,6 +5,8 @@ import Header from '../components/Header'
 import History from '../components/History';
 import Loading from '../components/Loading';
 import Login from '../components/Login';
+import NextDraw from '../components/NextDraw';
+import Tickets from '../components/Tickets';
 
 const Home: NextPage = () => {
 
@@ -27,6 +29,10 @@ const Home: NextPage = () => {
       </Head>
       <Header></Header>
       <History></History>
+      <div className='flex flex-col md:flex-row justify-center items-center py-5 px-5 space-y-3 space-x-3'>
+        <NextDraw></NextDraw>  
+        <Tickets></Tickets>
+      </div>
     </div>
 
   )
