@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+
+    .countdown-box {
+        @apply w-24 h-16 flex bg-[#004337]
+    }
+    .countdown-number {
+        @apply m-auto text-4xl text-white
+    }
+    .countdown-label {
+        @apply text-xs m-1 font-bold
+    }
+}

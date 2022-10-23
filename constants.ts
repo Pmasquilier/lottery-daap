@@ -1,1 +1,1 @@
-export const CURRENCY = 'MATIC';
+export const CURRENCY = 'ETHER';

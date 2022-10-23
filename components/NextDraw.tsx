@@ -2,10 +2,11 @@ import { useContract, useContractRead } from '@thirdweb-dev/react';
 import React from 'react'
 import { ethers } from 'ethers';
 import { CURRENCY } from '../constants';
+import Countdown from './CountdownTimer';
 
 function NextDraw() {
 
-    const { contract } = useContract("0xe3072A0dDD8c79Fece6dc5679033207511ca637c");
+    const { contract } = useContract(process.env.NEXT_PUBLIC_LOTTERY_CONTRACT_ADDRESS);
     const { data: remainingTickets } = useContractRead(contract, "RemainingTickets")
     const { data: currentWinningReward } = useContractRead(contract, "CurrentWinningReward")
 
@@ -22,29 +23,7 @@ function NextDraw() {
                 <p>{remainingTickets?.toNumber()}</p>
             </div>
         </div>
-        <p className='text-l pt-2 pb-1'>Ticket Sales have now CLOSED for this draw!</p>
-        <div className='flex justify-evenly'>
-            <div>
-                <div className='w-24 h-16 flex bg-[#004337]'>
-                    <p className='m-auto text-4xl text-white'>0</p>
-                </div>
-                <p className='text-xs m-1 font-bold'>HOURS</p>
-            </div>
-            <div>
-                <div className='w-24 h-16 flex bg-[#004337]'>
-                    <p className='m-auto text-4xl text-white'>0</p>
-                </div>
-                <p className='text-xs m-1 font-bold'>MINUTES</p>
-            </div>
-            <div>
-                <div className='w-24 h-16 flex bg-[#004337]'>
-                    <p className='m-auto text-4xl text-white'>0</p>
-                </div>
-                <p className='text-xs m-1 font-bold'>SECONDS</p>
-            </div>
-           
-        </div>
-
+        <Countdown></Countdown>
     </div>
   )
 }

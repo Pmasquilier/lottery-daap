@@ -5,7 +5,7 @@ import { ethers } from 'ethers';
 
 function History() {
 
-  const { contract } = useContract("0xe3072A0dDD8c79Fece6dc5679033207511ca637c");
+  const { contract } = useContract(process.env.NEXT_PUBLIC_LOTTERY_CONTRACT_ADDRESS);
   const { data: lastWinner } = useContractRead(contract, "lastWinner")
   const { data: lastWinningAmount } = useContractRead(contract, "lastWinnerAmount")
 

@@ -1,17 +1,17 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
 import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
-
+import { Toaster } from "react-hot-toast";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  
-  const activeChainId = ChainId.Mumbai;
-  
+  const activeChainId = ChainId.Goerli;
+
   return (
     <ThirdwebProvider desiredChainId={activeChainId}>
       <Component {...pageProps} />
+      <Toaster></Toaster>
     </ThirdwebProvider>
   );
 }
 
-export default MyApp
+export default MyApp;
