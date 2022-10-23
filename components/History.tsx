@@ -1,13 +1,22 @@
+import { useContract, useContractRead } from '@thirdweb-dev/react';
 import React from 'react'
+import { CURRENCY } from '../constants';
+import { ethers } from 'ethers';
 
 function History() {
+
+  const { contract } = useContract("0xe3072A0dDD8c79Fece6dc5679033207511ca637c");
+  const { data: lastWinner } = useContractRead(contract, "lastWinner")
+  const { data: lastWinningAmount } = useContractRead(contract, "lastWinnerAmount")
+
+
   return (
     <div className='flex flex-col md:flex-row ml-auto md:space-x-2 mr-2'>
         <p className='text-white'>
-            Last Winner: Ox645263546904359042590K425 
+            Last Winner: {lastWinner} 
         </p>
         <p className='text-white'>
-            Previous Winnings: 0,54 Matic
+            Previous Winnings: {lastWinningAmount && ethers.utils.formatEther(lastWinningAmount.toString())} {CURRENCY}
         </p>
     </div>
   )

@@ -10,17 +10,17 @@ import Tickets from '../components/Tickets';
 
 const Home: NextPage = () => {
 
-  const address = useAddress();
-  const { contract, isLoading } = useContract(process.env.NEXT_PUBLIC_LOTTERY_CONTRACT_ADDRESS);
+   const address = useAddress();
+   const { contract, isLoading} = useContract("0xe3072A0dDD8c79Fece6dc5679033207511ca637c");
 
   if (!address) {
     return <Login></Login>
   }
 
-/*   if (isLoading){
+  if (isLoading){
     return <Loading></Loading>
   }
-   */
+   
   return (
     <div className='bg-[#091B18] min-h-screen flex flex-col'>
       <Head>

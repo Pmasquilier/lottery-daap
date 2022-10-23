@@ -4,8 +4,11 @@ import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 
 
 function MyApp({ Component, pageProps }: AppProps) {
+  
+  const activeChainId = ChainId.Mumbai;
+  
   return (
-    <ThirdwebProvider desiredChainId={ChainId.Mumbai}>
+    <ThirdwebProvider desiredChainId={activeChainId}>
       <Component {...pageProps} />
     </ThirdwebProvider>
   );
