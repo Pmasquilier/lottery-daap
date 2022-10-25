@@ -1,14 +1,17 @@
 import {
+  useAddress,
   useContract,
   useContractRead,
   useContractWrite,
 } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CURRENCY } from "../constants";
 import toast from "react-hot-toast";
 
 function Tickets() {
+  const address = useAddress();
+
   const { contract } = useContract(
     process.env.NEXT_PUBLIC_LOTTERY_CONTRACT_ADDRESS
   );
@@ -28,7 +31,22 @@ function Tickets() {
     "BuyTickets"
   );
 
+  const { data: tickets } = useContractRead(contract, "getTickets");
+  console.log(tickets);
   let [quantity, setQuantity] = useState(1);
+  let [userTickets, setUserTickets] = useState(0);
+
+  useEffect(() => {
+    if (!tickets) return;
+
+    const totalTickets: String[] = tickets;
+
+    const noOfUserTickets = totalTickets.reduce(
+      (total, ticketAdress) => (ticketAdress === address ? total + 1 : total),
+      0
+    );
+    setUserTickets(noOfUserTickets);
+  }, [tickets, address]);
 
   function getTotalCostOfTickets(): Number {
     return (
@@ -109,10 +127,16 @@ function Tickets() {
             } */
             className="bg-gradient-to-br from-orange-500 to-emerald-400 m-auto p-2 disabled:from-gray-600 to:from-gray-600 disabled:text-gray-100 disabled:cursor-not-allowed"
           >
-            Buy {quantity} ticket(s)
+            Buy {quantity} ticket(s) for{" "}
+            {ticketPrice && getTotalCostOfTickets()} {CURRENCY}
           </button>
         </div>
       </div>
+      {userTickets > 0 && (
+        <div className="flex flex-row justify-between p-2 border-2 border-[#004337] m-2 ">
+          <h1 className="m-auto">You have {userTickets} tickets in this row</h1>
+        </div>
+      )}
     </div>
   );
 }
